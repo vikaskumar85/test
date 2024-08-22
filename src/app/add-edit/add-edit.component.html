@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Add/Edit User</h1>
+<form [formGroup]="addEditForm">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" [(ngModel)]="data.firstName">
+      <mat-error *ngIf="addEditForm.get('firstName')?.hasError('required') && addEditForm.get('firstName')?.touched">
+        First Name is required.
+      </mat-error> 
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" [(ngModel)]="data.lastName">
+      <mat-error *ngIf="addEditForm.get('lastName')?.hasError('required') && addEditForm.get('lastName')?.touched">
+        Last Name is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" [(ngModel)]="data.Email">
+      <mat-error *ngIf="addEditForm.get('email')?.hasError('required') && addEditForm.get('email')?.touched">
+        Email is required.
+      </mat-error>
+      <mat-error *ngIf="addEditForm.get('email')?.hasError('invalidEmail')">
+        Please enter a valid email address.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="cancel-button" (click)="onNoClick()">Cancel</button>
+    <button mat-button [disabled]="addEditForm.invalid" class="green-button" (click)="onSubmit()">Save</button>
+  </div>
+</form>

@@ -1,0 +1,57 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by Id, FirstName, LastName or Email"
+          [(ngModel)]="searchText"
+          (input)="Search($event)"
+        />
+      </div>
+    </div>
+<div class="col-md-12">
+      <h4>Contact List</h4>
+
+      <a (click)="createContact()" class="btn btn-sm btn-success mb-2">Add New</a>
+      <div class="card m-3">
+       
+            <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th><a (click)="sortBy('id')" style="cursor: pointer;">Id {{sortIcon('id')}}</a></th>
+                        <th><a (click)="sortBy('firstName')" style="cursor: pointer;">FirstName {{sortIcon('firstName')}}</a></th>
+                        <th><a (click)="sortBy('lastName')" style="cursor: pointer;">LastName {{sortIcon('lastName')}}</a></th>
+                        <th><a (click)="sortBy('email')" style="cursor: pointer;">Email {{sortIcon('email')}}</a></th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of pageOfItems">
+                        <td>{{item.id}}</td>
+                        <td>{{item.firstName}}</td>
+                        <td>{{item.lastName}}</td>
+                        <td>{{item.email}}</td>
+      
+                        <td>  <a (click)="updateContact(item)" class="btn btn-sm btn-success" >
+                          <i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                        <td>  <a  class="btn btn-sm btn-danger" (click)="deleteContact(item.id)" ><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                      </tr>
+                    <tr *ngIf="loading">
+                        <td colspan="5" class="text-center py-5">
+                            <span class="spinner-border spinner-border-lg align-center"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+       
+         <div class="card-footer pb-0 pt-3">
+            <pagination [items]="items" (changePage)="onChangePage($event)" ></pagination>
+        </div> 
+    
+</div>
+
+
+  </div>
+ 
